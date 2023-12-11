@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Data App</title>
+    <!-- Bootstrap CSS link -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- Plotly JS library -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="container mt-5">
+    <div class="row">
+        <div>
+            <header>
+                <h1 class="text-center mb-4">Stock Data App</h1>
+                
+                <form method="post" class="mb-4 col-md-6 offset-md-3">
+                    <div class="mb-3">
+                        <label for="ticker" class="form-label">Enter Stock Ticker:</label>
+                        <input type="text" id="ticker" name="ticker" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-dark w-100">Submit</button>
+                </form>
+            </header>
+
+            <!-- Navigation bar with Bootstrap styling -->
+            <nav class="navbar navbar-expand-lg">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/" data-section="Company_Overview">Company Overview</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/financials" data-section="Financials">Financial Overview</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/stock" data-section="Stock_Forecasting">Stock Forecasting</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            
+            <main>
+                {% if fcfs %}
+                    <div class="mb-4">
+                        <h2 class="text-center">Free Cash Flows (FCFs) for {{ ticker }}</h2>
+                        {{ fcfs | safe }}
+                    </div>
+                {% endif %}
+    
+                {% if cash %}
+                    <div class="mb-4">
+                        <h2 class="text-center">Cash Positions for {{ ticker }}</h2>
+                        {{ cash | safe }}
+                    </div>
+                {% endif %}
+
+                <!-- {% if icfs %}
+                    <div class="mb-4">
+                        <h2 class="text-center">Investing Cash Flows for {{ ticker }}</h2>
+                        {{ icfs | safe }}
+                    </div>
+                {% endif %} -->
+    
+                {% if error_message %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ error_message }}
+                    </div>
+                {% endif %}
+            </main>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and Popper.js scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-o2XZME6zDbk3u5i8Q9b1BHHWBJMz9p2vvD2Em4qmSfUp8y8W+Dd9jS9vRXFhEf7w" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-eziFk5Sd8DwFQOW3CqWOhcC8pPO95bR+3Q4zPxH8jzOq82+PDDzyIh2csFBfBm6x" crossorigin="anonymous"></script>
+</body>
+</html>
